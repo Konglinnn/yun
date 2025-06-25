@@ -1,4 +1,265 @@
 .collection-container {
-  padding: 40rpx;
-  color: #7c6a4d;
-} 
+  min-height: 100vh;
+  background: #FDF8F3;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  animation: fadeIn 0.5s;
+}
+
+/* 頂部導航欄 */
+.nav-bar {
+  width: 100vw;
+  height: 100rpx;
+  background: #BCA46A;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  box-shadow: 0 2rpx 8rpx #bca46a22;
+}
+.nav-btn {
+  width: 72rpx;
+  height: 72rpx;
+  border-radius: 50%;
+  background: #fff3e0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 16rpx;
+  box-shadow: 0 2rpx 8rpx #bca46a22;
+  transition: transform 0.1s;
+}
+.nav-btn:active {
+  transform: scale(0.92);
+}
+.nav-icon {
+  width: 40rpx;
+  height: 40rpx;
+}
+.nav-title {
+  flex: 1;
+  text-align: center;
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #7C4A1E;
+  letter-spacing: 4rpx;
+}
+
+/* 卡片列表 */
+.card-list {
+  flex: 1;
+  padding: 24rpx 0 0 0;
+  overflow-y: auto;
+}
+.treasure-card {
+  width: 92vw;
+  min-height: 180rpx;
+  background: #fff;
+  border-radius: 32rpx;
+  box-shadow: 0 4rpx 24rpx #bca46a11;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  margin: 0 auto 32rpx auto;
+  padding: 24rpx 24rpx 24rpx 24rpx;
+  transition: box-shadow 0.2s, transform 0.2s;
+  animation: fadeInUp 0.5s;
+}
+.treasure-card:active {
+  transform: scale(0.97);
+  box-shadow: 0 8rpx 32rpx #bca46a22;
+}
+.card-cover {
+  width: 140rpx;
+  height: 140rpx;
+  border-radius: 24rpx;
+  object-fit: cover;
+  margin-right: 24rpx;
+  background: #bca46a22;
+}
+.card-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-width: 0;
+}
+.card-title {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #7C4A1E;
+  margin-bottom: 8rpx;
+  line-height: 1.2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+.card-desc {
+  font-size: 24rpx;
+  color: #999;
+  line-height: 1.4;
+  margin-bottom: 16rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+.card-detail-btn {
+  align-self: flex-end;
+  background: #BCA46A;
+  color: #fff;
+  font-size: 24rpx;
+  border-radius: 24rpx;
+  padding: 8rpx 32rpx;
+  border: none;
+  box-shadow: 0 2rpx 8rpx #bca46a22;
+  font-weight: 500;
+  margin-top: 8rpx;
+  transition: transform 0.1s;
+}
+.card-detail-btn:active {
+  transform: scale(0.95);
+}
+
+/* AI助手悬浮icon */
+.ai-area {
+  width: 100vw;
+  height: 100vh;
+  left: 0;
+  top: 0;
+  z-index: 99;
+  position: absolute;
+  pointer-events: none;
+}
+.ai-icon {
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 2rpx 12rpx rgba(194,168,117,0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: auto;
+}
+.ai-icon image {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 4rpx solid #fff;
+  box-shadow: 0 2rpx 12rpx rgba(194,168,117,0.15);
+}
+.ai-chat-mask {
+  position: fixed;
+  left: 0; top: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.3);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.ai-chatbox {
+  width: 80vw;
+  height: 50vh;
+  background: #FDF8F3;
+  border-radius: 48rpx;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0 8rpx 32rpx rgba(194,168,117,0.15);
+}
+.ai-chat-header {
+  display: flex;
+  align-items: center;
+  padding: 24rpx;
+  border-bottom: 2rpx solid #C2A875;
+}
+.ai-avatar {
+  width: 64rpx;
+  height: 64rpx;
+  border-radius: 50%;
+  margin-right: 16rpx;
+}
+.ai-nickname {
+  font-size: 32rpx;
+  color: #5E3F23;
+}
+.ai-msg-list {
+  flex: 1;
+  padding: 24rpx;
+  overflow-y: auto;
+}
+.ai-msg-item {
+  margin-bottom: 16rpx;
+}
+.ai-avatar-mini {
+  width: 48rpx;
+  height: 48rpx;
+  border-radius: 50%;
+  margin-right: 8rpx;
+}
+.chat-bubble {
+  display: inline-block;
+  padding: 16rpx 24rpx;
+  border-radius: 24rpx;
+  background: #fff;
+  color: #333;
+  font-size: 28rpx;
+  max-width: 70vw;
+  word-break: break-all;
+}
+.chat-bubble.ai {
+  background: #F5E6C8;
+  color: #5E3F23;
+}
+.chat-bubble.user {
+  background: #C2A875;
+  color: #fff;
+}
+.ai-input-bar {
+  height: 88rpx;
+  display: flex;
+  align-items: center;
+  padding: 0 24rpx 24rpx 24rpx;
+}
+.ai-input {
+  flex: 1;
+  height: 88rpx;
+  border-radius: 44rpx;
+  background: #fff;
+  border: 2rpx solid #C2A875;
+  padding: 0 24rpx;
+  font-size: 28rpx;
+}
+.ai-send-btn {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50%;
+  background: #C2A875;
+  color: #fff;
+  margin-left: 16rpx;
+  font-size: 28rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Alibaba PuHuiTi', 'Microsoft YaHei', 'PingFang SC', 'Source Han Sans SC', Arial, sans-serif;
+  padding: 0;
+  border: none;
+  box-sizing: border-box;
+}
+
+/* 動效 */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(40rpx);}
+  to { opacity: 1; transform: translateY(0);}
+}

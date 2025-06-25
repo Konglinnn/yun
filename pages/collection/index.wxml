@@ -1,3 +1,55 @@
 <view class="collection-container">
-  <text>這是珍萃軒頁面</text>
-</view> 
+  <!-- 頂部導航欄 -->
+  <view class="nav-bar">
+    <view class="nav-btn left" bindtap="onBack">
+      <image src="/assets/icon-back.png" class="nav-icon"/>
+    </view>
+    <view class="nav-title">珍萃轩</view>
+    <view class="nav-btn right" bindtap="onFilter">
+      <image src="/assets/icon-filter.png" class="nav-icon"/>
+    </view>
+  </view>
+
+  <!-- 中部滾動內容區 -->
+  <scroll-view class="card-list" scroll-y>
+    <block wx:for="{{treasures}}" wx:key="id">
+      <view class="treasure-card" animation="fadeInUp">
+        <image class="card-cover" src="{{item.cover}}" mode="aspectFill"/>
+        <view class="card-info">
+          <view class="card-title">{{item.title}}</view>
+          <view class="card-desc">{{item.desc}}</view>
+          <button class="card-detail-btn" bindtap="goDetail" data-id="{{item.id}}">查看详情</button>
+        </view>
+      </view>
+    </block>
+  </scroll-view>
+
+  <!-- 文小鹤助手可移动icon -->
+  <movable-area class="ai-area">
+    <movable-view class="ai-icon" direction="all" y="600" x="300" bindtap="showAIChat">
+      <image src="/assets/ai-avatar.png"/>
+    </movable-view>
+  </movable-area>
+  <!-- AI助手对话框全屏遮罩 -->
+  <view wx:if="{{showAI}}" class="ai-chat-mask" bindtap="hideAIChat">
+    <view class="ai-chatbox" catchtap="stopTap">
+      <view class="ai-chat-header">
+        <image class="ai-avatar" src="/assets/ai-avatar.png"/>
+        <text class="ai-nickname">文小鹤</text>
+      </view>
+      <scroll-view class="ai-msg-list" scroll-y>
+        <view wx:for="{{messages}}" wx:key="index" class="ai-msg-item {{item.from}}" animation="bubbleIn">
+          <image wx:if="{{item.from=='ai'}}" class="ai-avatar-mini" src="/assets/ai-avatar.png"/>
+          <view class="chat-bubble {{item.from}}">
+            <text>{{item.text}}</text>
+          </view>
+        </view>
+        <view id="msgBottom"></view>
+      </scroll-view>
+      <view class="ai-input-bar">
+        <input class="ai-input" placeholder="请输入你的问题..." confirm-type="send" value="{{inputValue}}" bindinput="onInput" bindconfirm="sendMsg" />
+        <button class="ai-send-btn" bindtap="sendMsg">发送</button>
+      </view>
+    </view>
+  </view>
+</view>

@@ -1,3 +1,100 @@
 <view class="community-container">
-  <text>這是樂創集頁面</text>
-</view> 
+  <!-- 棕黃色頂部背景 -->
+  <view class="community-header-simple"></view>
+
+  <!-- 论坛中心顶图区域，右上角icon -->
+  <view class="forum-top-bg">
+    <image class="forum-bg-img" src="/assets/book2.png" mode="aspectFill"/>
+    <view class="forum-bg-gradient"></view>
+    <view class="forum-top-icons">
+      <view class="nav-btn" bindtap="onScan">
+        <image src="/assets/icon-scan.png" class="nav-icon"/>
+      </view>
+      <view class="nav-btn" bindtap="showMenu">
+        <image src="/assets/icon-more.png" class="nav-icon"/>
+      </view>
+    </view>
+    <view class="forum-top-content">
+      <view class="forum-search-bar">
+        <input class="forum-search-input" placeholder="搜索" />
+        <icon type="search" class="forum-search-icon"/>
+      </view>
+      <view class="forum-title">论坛中心</view>
+    </view>
+  </view>
+
+  <!-- Tab切换栏 -->
+  <view class="tab-bar-wrap">
+    <view class="tab-bar">
+      <view 
+        wx:for="{{tabs}}" 
+        wx:key="id" 
+        class="tab-item {{currentTab === index ? 'active' : ''}}"
+        bindtap="switchTab"
+        data-index="{{index}}">
+        {{item}}
+      </view>
+    </view>
+  </view>
+
+  <!-- Banner区域 -->
+  <view class="banner-row">
+    <swiper class="banner-swiper-rect" circular autoplay interval="3000" duration="500" bindchange="bannerSwiperChange">
+      <swiper-item wx:for="{{banners}}" wx:key="id">
+        <view class="banner-item-rect">
+          <image src="{{item.image}}" mode="aspectFill" class="banner-image-rect"/>
+          <view class="banner-gradient-mask"></view>
+        </view>
+      </swiper-item>
+    </swiper>
+    <view class="banner-info">
+      <view class="banner-slogan-rect">{{banners[bannerIndex].slogan}}</view>
+      <view class="banner-desc">{{banners[bannerIndex].desc}}</view>
+    </view>
+  </view>
+  <!-- banner指示點 -->
+  <view class="banner-indicator">
+    <view wx:for="{{banners}}" wx:key="id" class="indicator-dot {{bannerIndex === index ? 'active' : ''}}"></view>
+  </view>
+
+  <!-- 帖子列表 -->
+  <view class="post-list">
+    <view wx:for="{{posts}}" wx:key="id" class="post-item" animation="fadeIn">
+      <!-- 帖子头部：用户信息和时间 -->
+      <view class="post-header">
+        <view class="user-info">
+          <image class="avatar" src="{{item.avatar}}" mode="aspectFill"/>
+          <text class="nickname">{{item.nickname}}</text>
+        </view>
+        <text class="post-time">{{item.time}}</text>
+      </view>
+      <!-- 帖子图片 -->
+      <image 
+        class="post-image" 
+        src="{{item.image}}" 
+        mode="aspectFill"
+        bindtap="viewImage"
+        data-url="{{item.image}}"/>
+      <!-- 帖子内容 -->
+      <view class="post-content">
+        <view class="post-title">{{item.title}}</view>
+        <view class="post-desc">{{item.desc}}</view>
+      </view>
+      <!-- 互动按钮 -->
+      <view class="interaction-bar">
+        <view class="interaction-btn {{item.isLiked ? 'active' : ''}}" bindtap="toggleLike" data-id="{{item.id}}">
+          <image src="{{item.isLiked ? '/assets/icon-like-active.png' : '/assets/icon-like.png'}}" class="interaction-icon"/>
+          <text>{{item.likes}}</text>
+        </view>
+        <view class="interaction-btn" bindtap="goComment" data-id="{{item.id}}">
+          <image src="/assets/icon-comment.png" class="interaction-icon"/>
+          <text>{{item.comments}}</text>
+        </view>
+        <view class="interaction-btn {{item.isCollected ? 'active' : ''}}" bindtap="toggleCollect" data-id="{{item.id}}">
+          <image src="{{item.isCollected ? '/assets/icon-collect-active.png' : '/assets/icon-collect.png'}}" class="interaction-icon"/>
+          <text>{{item.collects}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

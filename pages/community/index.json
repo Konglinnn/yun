@@ -1,3 +1,6 @@
 {
-  "navigationBarTitleText": "樂創集"
-} 
+  "navigationBarTitleText": "乐创集",
+  "enablePullDownRefresh": true,
+  "backgroundColor": "#F7F3EB",
+  "navigationStyle": "custom"
+}
