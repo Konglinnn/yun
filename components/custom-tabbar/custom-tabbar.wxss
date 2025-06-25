@@ -26,12 +26,12 @@
   text-shadow: 0 4rpx 16rpx #e7d3b0;
 }
 .tabbar-icon {
-  width: 48rpx;
-  height: 48rpx;
+  width: 60rpx;
+  height: 60rpx;
   margin-bottom: 4rpx;
 }
 .tabbar-text {
-  font-size: 24rpx;
+  font-size: 28rpx;
   color: #7c6a4d;
 }
 .tabbar-item.active .tabbar-text {

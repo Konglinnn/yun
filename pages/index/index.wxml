@@ -41,7 +41,7 @@
     <view class="swiper-center">
       <swiper class="book-swiper" circular autoplay interval="6000" current="{{currentChapter}}" bindchange="onSwiperChange">
         <swiper-item wx:for="{{bookCovers}}" wx:key="index">
-          <view class="book-cover-wrapper {{currentChapter==index?'active':''}}">
+          <view class="book-cover-wrapper {{currentChapter==index?'active':''}} {{clickedIndex==index?'cover-tap-effect':''}}" data-index="{{index}}" bindtap="onBookCoverTap">
             <image class="book-cover" src="{{item.img}}"/>
           </view>
         </swiper-item>

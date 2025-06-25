@@ -30,6 +30,6 @@ Page({
   },
   goDetail(e) {
     const id = e.currentTarget.dataset.id;
-    wx.navigateTo({ url: `/pages/collection/detail?id=${id}` });
+    wx.navigateTo({ url: `/pages/collection/collection-detail?id=${id}` });
   }
 });

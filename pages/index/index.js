@@ -29,7 +29,8 @@ Page({
       {from: 'ai', text: '你好，我是文小鹤，有什么可以帮你？'}
     ],
     inputValue: '',
-    scrollTo: 'msgBottom'
+    scrollTo: 'msgBottom',
+    clickedIndex: -1
   },
 
   showAIChat() {
@@ -49,7 +50,6 @@ Page({
     if (!inputValue.trim()) return;
     const newMessages = messages.concat([{from: 'user', text: inputValue}]);
     this.setData({ messages: newMessages, inputValue: '', scrollTo: 'msgBottom' }, () => {
-      // 滚动到底部
       this.setData({ scrollTo: 'msgBottom' });
     });
     setTimeout(() => {
@@ -71,5 +71,17 @@ Page({
   // 字体轮播滑动时同步章节
   onTitleSwiperChange(e) {
     this.setData({ currentChapter: e.detail.current });
+  },
+  // 轮播图图片点击特效和弹窗
+  onBookCoverTap(e) {
+    const idx = Number(e.currentTarget.dataset.index);
+    this.setData({ clickedIndex: idx });
+    wx.showToast({
+      title: '绘本开发中',
+      icon: 'none'
+    });
+    setTimeout(() => {
+      this.setData({ clickedIndex: -1 });
+    }, 200);
   }
 });

@@ -1,0 +1,8 @@
+ <view class="detail-container">
+  <image class="detail-img" src="{{detail.cover}}" mode="aspectFit" />
+  <view class="detail-title">{{detail.title}}</view>
+  <view class="detail-desc">
+    {{detail.desc}}
+  </view>
+  <button class="back-btn" bindtap="onBack">返回</button>
+</view>

@@ -597,3 +597,11 @@
 .tap-effect:active {
   transform: scale(0.92);
 }
+.cover-tap-effect {
+  animation: cover-tap 0.2s;
+}
+@keyframes cover-tap {
+  0% { transform: scale(1); box-shadow: 0 0 0 #c2a87500; }
+  50% { transform: scale(0.92); box-shadow: 0 0 32rpx #c2a87588; }
+  100% { transform: scale(1); box-shadow: 0 0 0 #c2a87500; }
+}

@@ -1,10 +1,11 @@
 {
   "pages": [
-    "pages/index/index",
-    "pages/collection/index",
-    "pages/community/index",
-    "pages/profile/index"
-  ],
+  "pages/index/index",
+  "pages/collection/index",
+  "pages/collection/collection-detail",
+  "pages/community/index",
+  "pages/profile/index"
+],
   "window": {
     "navigationBarTextStyle": "black",
     "navigationBarTitleText": "鹤绘云韵",
