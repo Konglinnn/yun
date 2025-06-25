@@ -1,0 +1,66 @@
+<!--index.wxml-->
+<scroll-view class="scrollarea" scroll-y type="list">
+  <view class="container">
+    <view class="userinfo">
+      <block wx:if="{{canIUseNicknameComp && !hasUserInfo}}">
+        <button class="avatar-wrapper" open-type="chooseAvatar" bind:chooseavatar="onChooseAvatar">
+          <image class="avatar" src="{{userInfo.avatarUrl}}"></image>
+        </button>
+        <view class="nickname-wrapper">
+          <text class="nickname-label">昵称</text>
+          <input type="nickname" class="nickname-input" placeholder="请输入昵称" bind:change="onInputChange" />
+        </view>
+      </block>
+      <block wx:elif="{{!hasUserInfo}}">
+        <button wx:if="{{canIUseGetUserProfile}}" bindtap="getUserProfile"> 获取头像昵称 </button>
+        <view wx:else> 请使用2.10.4及以上版本基础库 </view>
+      </block>
+      <block wx:else>
+        <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
+        <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+      </block>
+    </view>
+    <view class="usermotto">
+      <text class="user-motto">{{motto}}</text>
+    </view>
+  </view>
+</scroll-view>
+
+<view class="home-container">
+  <!-- 頂部欄 -->
+  <view class="home-header">
+    <icon type="search" class="icon-search"/>
+    <text class="platform-title">鶴繪雲韻</text>
+    <view class="header-icons">
+      <icon type="more" class="icon-menu"/>
+      <icon type="scan" class="icon-scan"/>
+    </view>
+  </view>
+
+  <!-- 橫向可滑動繪本封面 -->
+  <scroll-view class="book-scroll" scroll-x>
+    <image class="book-cover" src="/assets/book1.png"/>
+    <image class="book-cover" src="/assets/book2.png"/>
+    <image class="book-cover" src="/assets/book3.png"/>
+  </scroll-view>
+
+  <!-- 章節導航欄 -->
+  <view class="chapter-nav">
+    <icon class="arrow" type="left" bindtap="prevChapter"/>
+    <scroll-view class="chapter-scroll" scroll-x>
+      <button class="chapter-btn" wx:for="{{chapters}}" wx:key="index">{{item}}</button>
+    </scroll-view>
+    <icon class="arrow" type="right" bindtap="nextChapter"/>
+  </view>
+
+  <!-- AI助手懸浮icon -->
+  <movable-area class="ai-area">
+    <movable-view class="ai-icon" direction="all" y="600" x="300" bindtap="toggleAI">
+      <image src="/assets/ai-icon.png"/>
+    </movable-view>
+  </movable-area>
+  <view wx:if="{{showAI}}" class="ai-chatbox">
+    <view class="chat-bubble">你好，我是文小鶴，有什麼可以幫你？</view>
+    <image class="ai-avatar" src="/assets/ai-avatar.png"/>
+  </view>
+</view>

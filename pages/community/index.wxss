@@ -1,0 +1,4 @@
+.community-container {
+  padding: 40rpx;
+  color: #7c6a4d;
+} 
