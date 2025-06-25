@@ -1,0 +1,40 @@
+.custom-tabbar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 110rpx;
+  background: #fff;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  box-shadow: 0 -2rpx 12rpx rgba(194,168,117,0.08);
+  z-index: 999;
+}
+.tabbar-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+  padding: 8rpx 0 0 0;
+}
+.tabbar-item.active {
+  transform: scale(1.18);
+  color: #C2A875;
+  text-shadow: 0 4rpx 16rpx #e7d3b0;
+}
+.tabbar-icon {
+  width: 48rpx;
+  height: 48rpx;
+  margin-bottom: 4rpx;
+}
+.tabbar-text {
+  font-size: 24rpx;
+  color: #7c6a4d;
+}
+.tabbar-item.active .tabbar-text {
+  color: #C2A875;
+  font-weight: bold;
+}

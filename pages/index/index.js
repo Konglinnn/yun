@@ -1,64 +1,69 @@
-// index.js
-const defaultAvatarUrl = 'https://mmbiz.qpic.cn/mmbiz/icTdbqWNOwNRna42FI242Lcia07jQodd2FJGIYQfG0LAJGFxM4FbnQP6yfMxBgJ0F3YRqJCJ1aPAK2dQagdusBZg/0'
-
 Page({
   data: {
-    currentIndex: 0,
+    bookCovers: [
+      {img: '/assets/book1.png'},
+      {img: '/assets/book2.png'},
+      {img: '/assets/book3.png'},
+      {img: '/assets/book4.png'},
+      {img: '/assets/book5.png'}
+    ],
+    // 章節標題
+    chapterTitles: [
+      '辛氏酒店',
+      '黄鹤',
+      '幺妹镇龟蛇',
+      '黄鹤楼飘金',
+      '仙鲤遗踪'
+    ],
+    // 章節按鈕
+    chapters: [
+      '第一章',
+      '第二章',
+      '第三章',
+      '第四章',
+      '第五章'
+    ],
+    currentChapter: 0,
     showAI: false,
-    inputValue: '',
     messages: [
-      { from: 'ai', text: '你好，我是文小鹤，有什么可以帮你？' }
+      {from: 'ai', text: '你好，我是文小鹤，有什么可以帮你？'}
     ],
-    bookList: [
-      { title: '辛氏酒店', img: '/assets/book1.png' },
-      { title: '黄鹤', img: '/assets/book2.png' },
-      { title: '幺妹镇龟蛇', img: '/assets/book3.png' },
-      { title: '黄鹤楼飘金', img: '/assets/book4.png' },
-      { title: '仙鲤遗踪', img: '/assets/book5.png' }
-    ],
-    scrollTo: ''
-  },
-  selectBook(e) {
-    this.setData({ currentIndex: e.currentTarget.dataset.index });
-  },
-  prevBook() {
-    let idx = this.data.currentIndex - 1;
-    if (idx < 0) idx = this.data.bookList.length - 1;
-    this.setData({ currentIndex: idx });
-  },
-  nextBook() {
-    let idx = this.data.currentIndex + 1;
-    if (idx >= this.data.bookList.length) idx = 0;
-    this.setData({ currentIndex: idx });
+    inputValue: ''
   },
   showAIChat() {
-    this.setData({ showAI: true }, this.scrollToBottom);
+    this.setData({ showAI: true });
   },
   hideAIChat() {
     this.setData({ showAI: false });
   },
-  stopTap() {
-    // 阻止冒泡，防止点击对话框本身关闭
+  stopTap(e) {
+    // 阻止冒泡
   },
   onInput(e) {
     this.setData({ inputValue: e.detail.value });
   },
   sendMsg() {
-    const val = this.data.inputValue.trim();
-    if (!val) return;
-    const newMsgs = this.data.messages.concat([{ from: 'user', text: val }]);
-    this.setData({
-      messages: newMsgs,
-      inputValue: ''
-    }, this.scrollToBottom);
+    const { inputValue, messages } = this.data;
+    if (!inputValue.trim()) return;
+    messages.push({from: 'user', text: inputValue});
     // 模拟AI回复
     setTimeout(() => {
-      this.setData({
-        messages: this.data.messages.concat([{ from: 'ai', text: '收到：' + val }])
-      }, this.scrollToBottom);
-    }, 600);
+      messages.push({from: 'ai', text: '这是AI的回复：' + inputValue});
+      this.setData({ messages, inputValue: '', scrollTo: 'msgBottom' });
+    }, 800);
+    this.setData({ messages, inputValue: '', scrollTo: 'msgBottom' });
   },
-  scrollToBottom() {
-    this.setData({ scrollTo: 'msgBottom' });
+  // 章節按鈕點擊
+  selectChapter(e) {
+    const idx = Number(e.currentTarget.dataset.index);
+    this.setData({ currentChapter: idx });
+  },
+  // 圖片輪播滑動時同步章節
+  onSwiperChange(e) {
+    this.setData({ currentChapter: e.detail.current });
+  },
+  // 字體輪播滑動時同步章節
+  onTitleSwiperChange(e) {
+    this.setData({ currentChapter: e.detail.current });
   }
-})
+});

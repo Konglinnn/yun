@@ -1,68 +1,79 @@
 <!--index.wxml-->
-<scroll-view class="scrollarea" scroll-y type="list">
-  <view class="container">
-    <view class="userinfo">
-      <block wx:if="{{canIUseNicknameComp && !hasUserInfo}}">
-        <button class="avatar-wrapper" open-type="chooseAvatar" bind:chooseavatar="onChooseAvatar">
-          <image class="avatar" src="{{userInfo.avatarUrl}}"></image>
-        </button>
-        <view class="nickname-wrapper">
-          <text class="nickname-label">昵称</text>
-          <input type="nickname" class="nickname-input" placeholder="请输入昵称" bind:change="onInputChange" />
-        </view>
-      </block>
-      <block wx:elif="{{!hasUserInfo}}">
-        <button wx:if="{{canIUseGetUserProfile}}" bindtap="getUserProfile"> 获取头像昵称 </button>
-        <view wx:else> 请使用2.10.4及以上版本基础库 </view>
-      </block>
-      <block wx:else>
-        <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
-        <text class="userinfo-nickname">{{userInfo.nickName}}</text>
-      </block>
-    </view>
-    <view class="usermotto">
-      <text class="user-motto">{{motto}}</text>
-    </view>
-  </view>
-</scroll-view>
-
 <view class="home-container">
-  <!-- 頂部欄 -->
+  <!-- 頂部搜索欄 -->
   <view class="home-header">
-    <icon type="search" class="icon-search"/>
-    <text class="platform-title">鶴繪雲韻</text>
-    <view class="header-icons">
-      <icon type="more" class="icon-menu"/>
-      <icon type="scan" class="icon-scan"/>
+    <view class="search-bar-wrap">
+      <icon type="search" class="icon-search"/>
+      <input class="search-bar" placeholder="搜索绘本/藏品" confirm-type="search" />
     </view>
   </view>
 
-  <!-- 橫向可滑動繪本封面 -->
-  <scroll-view class="book-scroll" scroll-x>
-    <image class="book-cover" src="/assets/book1.png"/>
-    <image class="book-cover" src="/assets/book2.png"/>
-    <image class="book-cover" src="/assets/book3.png"/>
-  </scroll-view>
-
-  <!-- 章節導航欄 -->
-  <view class="chapter-nav">
-    <icon class="arrow" type="left" bindtap="prevChapter"/>
-    <scroll-view class="chapter-scroll" scroll-x>
-      <button class="chapter-btn" wx:for="{{chapters}}" wx:key="index">{{item}}</button>
-    </scroll-view>
-    <icon class="arrow" type="right" bindtap="nextChapter"/>
+  <!-- 特效標題 -->
+  <view class="platform-title-effect">
+    <text class="platform-title-effect-text">鹤绘云韵</text>
   </view>
 
-  <!-- AI助手懸浮icon -->
+  <!-- 互動繪本漸變框 -->
+  <view class="interactive-gradient-box">
+    <view class="interactive-left">
+      <view class="interactive-title">智慧互动绘本</view>
+      <button class="interactive-action" lang="zh_CN">立即体验</button>
+    </view>
+    <image class="interactive-bg" src="/assets/5.png" mode="aspectFill" />
+  </view>
+
+  <!-- 內容區塊 -->
+  <view class="main-content">
+    <!-- 轮播字体区块 -->
+    <view class="title-swiper-area">
+      <image class="title-deco" src="/assets/1.png"/>
+      <swiper class="title-swiper" circular autoplay interval="4000" current="{{currentChapter}}" bindchange="onTitleSwiperChange">
+        <swiper-item wx:for="{{chapterTitles}}" wx:key="index">
+          <view class="title-text {{currentChapter==index?'active':''}}">{{item}}</view>
+        </swiper-item>
+      </swiper>
+      <image class="title-deco" src="/assets/1.png"/>
+    </view>
+
+    <!-- 居中正方形轮播图 -->
+    <view class="swiper-center">
+      <swiper class="book-swiper" circular autoplay interval="4000" current="{{currentChapter}}" bindchange="onSwiperChange">
+        <swiper-item wx:for="{{bookCovers}}" wx:key="index">
+          <view class="book-cover-wrapper">
+            <image class="book-cover" src="{{item.img}}"/>
+          </view>
+        </swiper-item>
+      </swiper>
+    </view>
+
+    <!-- 横向滑动章节栏 -->
+    <scroll-view class="chapter-scroll" scroll-x scroll-with-animation>
+      <view class="chapter-btns">
+        <button class="chapter-btn {{currentChapter==index?'active':''}}" 
+          wx:for="{{chapters}}" 
+          wx:key="index" 
+          data-index="{{index}}" 
+          bindtap="selectChapter">
+          {{item}}
+        </button>
+      </view>
+    </scroll-view>
+  </view>
+
+  <!-- 右下角可移动的文小鹤icon -->
   <movable-area class="ai-area">
     <movable-view class="ai-icon" direction="all" y="600" x="300" bindtap="showAIChat">
-      <image src="/assets/ai-icon.png"/>
+      <image src="/assets/ai-avatar.png"/>
     </movable-view>
   </movable-area>
   <!-- AI助手对话框全屏遮罩 -->
   <view wx:if="{{showAI}}" class="ai-chat-mask" bindtap="hideAIChat">
     <view class="ai-chatbox" catchtap="stopTap">
-      <scroll-view class="ai-msg-list" scroll-y scroll-with-animation scroll-into-view="{{scrollTo}}">
+      <view class="ai-chat-header">
+        <image class="ai-avatar" src="/assets/ai-avatar.png"/>
+        <text class="ai-nickname">文小鹤</text>
+      </view>
+      <scroll-view class="ai-msg-list" scroll-y>
         <view wx:for="{{messages}}" wx:key="index" class="ai-msg-item {{item.from}}" animation="bubbleIn">
           <image wx:if="{{item.from=='ai'}}" class="ai-avatar-mini" src="/assets/ai-avatar.png"/>
           <view class="chat-bubble {{item.from}}">
@@ -71,10 +82,15 @@
         </view>
         <view id="msgBottom"></view>
       </scroll-view>
-      <view class="ai-input-bar-align">
-        <input class="ai-input-align" placeholder="请输入你的问题..." confirm-type="send" value="{{inputValue}}" bindinput="onInput" bindconfirm="sendMsg" />
-        <button class="ai-send-btn-align" bindtap="sendMsg">发送</button>
+      <view class="ai-input-bar">
+        <input class="ai-input" placeholder="请输入你的问题..." confirm-type="send" value="{{inputValue}}" bindinput="onInput" bindconfirm="sendMsg" />
+        <button class="ai-send-btn" bindtap="sendMsg">发送</button>
       </view>
     </view>
   </view>
+</view>
+<!-- 底部裝飾雲朵區塊，黃色漸變背景 -->
+<view class="bottom-cloud-gradient-bg">
+  <image class="bottom-cloud left higher" src="/assets/cloud.png" mode="widthFix" />
+  <image class="bottom-cloud right lower" src="/assets/cloud.png" mode="widthFix" />
 </view>
