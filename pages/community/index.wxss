@@ -70,7 +70,7 @@
   align-items: flex-start;
 }
 .forum-search-bar {
-  width: calc(100vw - 64rpx);
+  width: 88vw;
   max-width: 600rpx;
   height: 56rpx;
   background: rgba(255,255,255,0.65);
@@ -78,8 +78,9 @@
   display: flex;
   align-items: center;
   padding: 0 20rpx;
-  margin-bottom: 24rpx;
+  margin: 24rpx auto 24rpx auto;
   box-sizing: border-box;
+  box-shadow: 0 2rpx 8rpx #bca46a11;
 }
 .forum-search-input {
   flex: 1;
@@ -93,12 +94,43 @@
   font-size: 32rpx;
   color: #bca46a;
 }
+.forum-title-row {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8rpx;
+}
 .forum-title {
   font-size: 44rpx;
   font-weight: bold;
   color: #fff;
   text-shadow: 0 4rpx 12rpx #bca46a99;
-  margin-bottom: 8rpx;
+}
+.forum-title-icons {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-left: 16rpx;
+}
+.forum-title-icons .nav-btn {
+  width: 48rpx;
+  height: 48rpx;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 12rpx;
+  transition: transform 0.2s;
+}
+.forum-title-icons .nav-btn:active {
+  transform: scale(0.92);
+}
+.forum-title-icons .nav-icon {
+  width: 28rpx;
+  height: 28rpx;
 }
 
 /* Tab栏样式 */

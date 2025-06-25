@@ -6,20 +6,22 @@
   <view class="forum-top-bg">
     <image class="forum-bg-img" src="/assets/book2.png" mode="aspectFill"/>
     <view class="forum-bg-gradient"></view>
-    <view class="forum-top-icons">
-      <view class="nav-btn" bindtap="onScan">
-        <image src="/assets/icon-scan.png" class="nav-icon"/>
-      </view>
-      <view class="nav-btn" bindtap="showMenu">
-        <image src="/assets/icon-more.png" class="nav-icon"/>
-      </view>
-    </view>
     <view class="forum-top-content">
+      <view class="forum-title-row">
+        <view class="forum-title">论坛中心</view>
+        <view class="forum-title-icons">
+          <view class="nav-btn" bindtap="onScan">
+            <image src="/assets/icon-scan.png" class="nav-icon"/>
+          </view>
+          <view class="nav-btn" bindtap="showMenu">
+            <image src="/assets/icon-more.png" class="nav-icon"/>
+          </view>
+        </view>
+      </view>
       <view class="forum-search-bar">
         <input class="forum-search-input" placeholder="搜索" />
         <icon type="search" class="forum-search-icon"/>
       </view>
-      <view class="forum-title">论坛中心</view>
     </view>
   </view>
 

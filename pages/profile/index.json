@@ -1,3 +1,5 @@
 {
-  "navigationBarTitleText": "畫韻冊"
-} 
+  "navigationBarTitleText": "画韵册",
+  "enablePullDownRefresh": false,
+  "backgroundColor": "#F7F3EB"
+}
