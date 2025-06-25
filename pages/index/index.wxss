@@ -444,3 +444,62 @@
   max-width: 200rpx;
   z-index: 2;
 }
+.ai-msg-item.user {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+  align-items: flex-start;
+  text-align: right;
+}
+.chat-bubble.user {
+  background: #C2A875;
+  color: #fff;
+  margin-left: 0;
+  margin-right: 8rpx;
+  align-self: flex-end;
+}
+.ai-msg-item.ai {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  text-align: left;
+}
+.chat-bubble.ai {
+  background: #F5E6C8;
+  color: #5E3F23;
+  margin-right: 0;
+  margin-left: 8rpx;
+  align-self: flex-start;
+}
+
+.collection-header-bg {
+  position: absolute;
+  left: 0; top: 0; width: 100vw; height: 240rpx;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none; /* 防止遮擋點擊 */
+}
+.collection-bg-img {
+  position: absolute;
+  left: 0; top: 0; width: 100vw; height: 240rpx;
+  object-fit: cover;
+  opacity: 0.7;
+  z-index: 1;
+}
+.collection-bg-gradient {
+  position: absolute;
+  left: 0; top: 0; width: 100vw; height: 240rpx;
+  background: linear-gradient(180deg, #BCA46A 0%, rgba(188,164,106,0.00) 100%);
+  opacity: 0.92;
+  z-index: 2;
+}
+.collection-container {
+  position: relative;
+  z-index: 10;
+  min-height: 100vh;
+  background: transparent; /* 不要設置白色 */
+  display: flex;
+  flex-direction: column;
+  animation: fadeIn 0.5s;
+}

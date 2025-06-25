@@ -1,5 +1,7 @@
 Page({
   data: {
+    timelineTabs: ['历史渊源', '新石器时代', '战国', '西汉', '魏晋'],
+    timelineCurrent: 0,
     treasures: [
       {
         id: 1,
@@ -14,12 +16,11 @@ Page({
         desc: '唐代三彩陶器，色彩斑斓，造型生动，展现了丝绸之路的繁荣景象。'
       }
       // ...更多藏品
-    ],
-    showAI: false,
-    messages: [
-      {from: 'ai', text: '你好，我是文小鹤，有什么可以帮你？'}
-    ],
-    inputValue: ''
+    ]
+  },
+  onTimelineTab(e) {
+    this.setData({ timelineCurrent: e.currentTarget.dataset.index });
+    // 這裡可以根據tab切換內容
   },
   onBack() {
     wx.navigateBack();
@@ -30,28 +31,5 @@ Page({
   goDetail(e) {
     const id = e.currentTarget.dataset.id;
     wx.navigateTo({ url: `/pages/collection/detail?id=${id}` });
-  },
-  showAIChat() {
-    this.setData({ showAI: true });
-  },
-  hideAIChat() {
-    this.setData({ showAI: false });
-  },
-  stopTap(e) {
-    // 阻止冒泡
-  },
-  onInput(e) {
-    this.setData({ inputValue: e.detail.value });
-  },
-  sendMsg() {
-    const { inputValue, messages } = this.data;
-    if (!inputValue.trim()) return;
-    messages.push({from: 'user', text: inputValue});
-    // 模拟AI回复
-    setTimeout(() => {
-      messages.push({from: 'ai', text: '这是AI的回复：' + inputValue});
-      this.setData({ messages, inputValue: '', scrollTo: 'msgBottom' });
-    }, 800);
-    this.setData({ messages, inputValue: '', scrollTo: 'msgBottom' });
   }
 });

@@ -1,3 +1,5 @@
 {
-  "navigationBarTitleText": "珍萃轩"
+  "navigationBarTitleText": "珍萃轩",
+  "enablePullDownRefresh": true,
+  "backgroundColor": "#F7F3EB"
 }
