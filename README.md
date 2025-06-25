@@ -43,3 +43,11 @@ README.md # 项目说明（主引导文件）
 README.zh-CN.md # 中文说明
 README.en.md # 英文说明
 
+## 运行方法  
+1. 克隆 GitHub 仓库到本地  
+2. 用微信开发者工具打开 `/miniprogram` 目录  
+3. 在 `project.config.json` 中配置合法域名 `https://api.siliconflow.cn`  
+4. 填入 SiliconFlow API 密钥，调试运行（推荐真机预览）  
+
+## 许可证  
+MIT License  
