@@ -85,8 +85,15 @@
         <view id="msgBottom"></view>
       </scroll-view>
       <view class="ai-input-bar">
-        <input class="ai-input" placeholder="请输入你的问题..." confirm-type="send" value="{{inputValue}}" bindinput="onInput" bindconfirm="sendMsg" />
-        <button class="ai-send-btn tap-effect" bindtap="sendMsg">发送</button>
+        <input class="ai-input" placeholder="请输入你的问题..." confirm-type="send" value="{{inputValue}}" bindinput="onInput" bindconfirm="sendMsg" disabled="{{loading}}" />
+        <button class="ai-send-btn tap-effect" bindtap="sendMsg" disabled="{{loading}}">
+          发送
+        </button>
+      </view>
+      <!-- 新增底部功能按钮 -->
+      <view class="ai-bottom-btns">
+        <button class="ai-func-btn" bindtap="startRiddleGame" disabled="{{loading}}">字谜游戏</button>
+        <button class="ai-func-btn" bindtap="startTodayStory" disabled="{{loading}}">今日故事</button>
       </view>
     </view>
   </view>
