@@ -1,19 +1,21 @@
 <!--index.wxml-->
 <view class="home-container">
-  <!-- 頂部搜索欄 -->
-  <view class="home-header">
-    <view class="search-bar-wrap">
-      <icon type="search" class="icon-search"/>
-      <input class="search-bar" placeholder="搜索绘本/藏品" confirm-type="search" />
+  <!-- 顶部搜索栏 -->
+  <view class="top-bg-effect">
+    <image class="top-bg-img" src="/assets/ge.png" mode="aspectFill" />
+    <view class="top-bg-gradient"></view>
+    <view class="home-header">
+      <view class="search-bar-wrap">
+        <icon type="search" class="icon-search"/>
+        <input class="search-bar" placeholder="搜索绘本/藏品" confirm-type="search" />
+      </view>
+    </view>
+    <view class="platform-title-effect">
+      <text class="platform-title-effect-text">鹤绘云韵</text>
     </view>
   </view>
 
-  <!-- 特效標題 -->
-  <view class="platform-title-effect">
-    <text class="platform-title-effect-text">鹤绘云韵</text>
-  </view>
-
-  <!-- 互動繪本漸變框 -->
+  <!-- 互动绘本渐变框 -->
   <view class="interactive-gradient-box">
     <view class="interactive-left">
       <view class="interactive-title">智慧互动绘本</view>
@@ -22,24 +24,24 @@
     <image class="interactive-bg" src="/assets/5.png" mode="aspectFill" />
   </view>
 
-  <!-- 內容區塊 -->
+  <!-- 内容区块 -->
   <view class="main-content">
     <!-- 轮播字体区块 -->
     <view class="title-swiper-area">
-      <image class="title-deco" src="/assets/1.png"/>
-      <swiper class="title-swiper" circular autoplay interval="4000" current="{{currentChapter}}" bindchange="onTitleSwiperChange">
+      <image class="title-deco tap-effect" src="/assets/1.png"/>
+      <swiper class="title-swiper" circular autoplay interval="6000" current="{{currentChapter}}" bindchange="onTitleSwiperChange">
         <swiper-item wx:for="{{chapterTitles}}" wx:key="index">
           <view class="title-text {{currentChapter==index?'active':''}}">{{item}}</view>
         </swiper-item>
       </swiper>
-      <image class="title-deco" src="/assets/1.png"/>
+      <image class="title-deco tap-effect" src="/assets/1.png"/>
     </view>
 
     <!-- 居中正方形轮播图 -->
     <view class="swiper-center">
-      <swiper class="book-swiper" circular autoplay interval="4000" current="{{currentChapter}}" bindchange="onSwiperChange">
+      <swiper class="book-swiper" circular autoplay interval="6000" current="{{currentChapter}}" bindchange="onSwiperChange">
         <swiper-item wx:for="{{bookCovers}}" wx:key="index">
-          <view class="book-cover-wrapper">
+          <view class="book-cover-wrapper {{currentChapter==index?'active':''}}">
             <image class="book-cover" src="{{item.img}}"/>
           </view>
         </swiper-item>
@@ -49,7 +51,7 @@
     <!-- 横向滑动章节栏 -->
     <scroll-view class="chapter-scroll" scroll-x scroll-with-animation>
       <view class="chapter-btns">
-        <button class="chapter-btn {{currentChapter==index?'active':''}}" 
+        <button class="chapter-btn tap-effect {{currentChapter==index?'active':''}}" 
           wx:for="{{chapters}}" 
           wx:key="index" 
           data-index="{{index}}" 
@@ -62,7 +64,7 @@
 
   <!-- 右下角可移动的文小鹤icon -->
   <movable-area class="ai-area">
-    <movable-view class="ai-icon" direction="all" y="600" x="300" bindtap="showAIChat">
+    <movable-view class="ai-icon tap-effect" direction="all" y="600" x="300" bindtap="showAIChat">
       <image src="/assets/ai-avatar.png"/>
     </movable-view>
   </movable-area>
@@ -73,8 +75,8 @@
         <image class="ai-avatar" src="/assets/ai-avatar.png"/>
         <text class="ai-nickname">文小鹤</text>
       </view>
-      <scroll-view class="ai-msg-list" scroll-y>
-        <view wx:for="{{messages}}" wx:key="index" class="ai-msg-item {{item.from}}" animation="bubbleIn">
+      <scroll-view class="ai-msg-list" scroll-y scroll-into-view="{{scrollTo}}">
+        <view wx:for="{{messages}}" wx:key="index" class="ai-msg-item {{item.from}}" animation="{{item.from=='user'?'bubblePopUser':'bubblePopAI'}}">
           <image wx:if="{{item.from=='ai'}}" class="ai-avatar-mini" src="/assets/ai-avatar.png"/>
           <view class="chat-bubble {{item.from}}">
             <text>{{item.text}}</text>
@@ -84,13 +86,8 @@
       </scroll-view>
       <view class="ai-input-bar">
         <input class="ai-input" placeholder="请输入你的问题..." confirm-type="send" value="{{inputValue}}" bindinput="onInput" bindconfirm="sendMsg" />
-        <button class="ai-send-btn" bindtap="sendMsg">发送</button>
+        <button class="ai-send-btn tap-effect" bindtap="sendMsg">发送</button>
       </view>
     </view>
   </view>
-</view>
-<!-- 底部裝飾雲朵區塊，黃色漸變背景 -->
-<view class="bottom-cloud-gradient-bg">
-  <image class="bottom-cloud left higher" src="/assets/cloud.png" mode="widthFix" />
-  <image class="bottom-cloud right lower" src="/assets/cloud.png" mode="widthFix" />
 </view>

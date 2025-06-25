@@ -7,7 +7,7 @@
   ],
   "window": {
     "navigationBarTextStyle": "black",
-    "navigationBarTitleText": "鶴繪雲韻",
+    "navigationBarTitleText": "鹤绘云韵",
     "navigationBarBackgroundColor": "#ffffff"
   },
   "tabBar": {
@@ -20,25 +20,25 @@
         "pagePath": "pages/index/index",
         "iconPath": "assets/tab1.png",
         "selectedIconPath": "assets/tab1.png",
-        "text": "繪夢閣"
+        "text": "绘梦阁"
       },
       {
         "pagePath": "pages/collection/index",
         "iconPath": "assets/tab2.png",
         "selectedIconPath": "assets/tab2.png",
-        "text": "珍萃軒"
+        "text": "珍萃轩"
       },
       {
         "pagePath": "pages/community/index",
         "iconPath": "assets/tab3.png",
         "selectedIconPath": "assets/tab3.png",
-        "text": "樂創集"
+        "text": "乐创集"
       },
       {
         "pagePath": "pages/profile/index",
         "iconPath": "assets/tab4.png",
         "selectedIconPath": "assets/tab4.png",
-        "text": "畫韻冊"
+        "text": "画韵册"
       }
     ]
   }

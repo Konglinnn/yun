@@ -45,7 +45,7 @@
             <view class="card-info">
               <view class="card-title">{{item.title}}</view>
               <view class="card-desc">{{item.desc}}</view>
-              <button class="card-detail-btn" bindtap="goDetail" data-id="{{item.id}}">查看详情</button>
+              <button class="card-detail-btn{{index==1?' card-detail-btn-second':''}}" bindtap="goDetail" data-id="{{item.id}}">查看详情</button>
             </view>
           </view>
         </view>

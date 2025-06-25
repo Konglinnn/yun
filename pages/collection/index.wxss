@@ -4,20 +4,20 @@ page {
 
 .collection-header-bg {
   position: absolute;
-  left: 0; top: 0; width: 100vw; height: 320rpx; /* 高度加大 */
+  left: 0; top: 0; width: 100vw; height: 320rpx;
   z-index: 0;
   overflow: hidden;
 }
 .collection-bg-img {
   position: absolute;
-  left: 0; top: 0; width: 100vw; height: 320rpx; /* 高度加大 */
+  left: 0; top: 0; width: 100vw; height: 320rpx;
   object-fit: cover;
   opacity: 0.7;
   z-index: 1;
 }
 .collection-bg-gradient {
   position: absolute;
-  left: 0; top: 0; width: 100vw; height: 320rpx; /* 高度加大 */
+  left: 0; top: 0; width: 100vw; height: 320rpx;
   background: linear-gradient(180deg, #BCA46A 0%, rgba(188,164,106,0.00) 100%);
   opacity: 0.92;
   z-index: 2;
@@ -31,13 +31,13 @@ page {
   position: relative;
   animation: fadeIn 0.5s;
   z-index: 10;
-  padding-top: 60rpx; /* 讓內容下移，避免被大header遮住 */
+  padding-top: 60rpx;
 }
 
 /* 頂部導航欄 */
 .nav-bar {
   width: 100vw;
-  height: 120rpx; /* 高度加大 */
+  height: 120rpx;
   background: transparent;
   display: flex;
   align-items: center;
@@ -48,11 +48,11 @@ page {
   box-shadow: 0 2rpx 8rpx #bca46a22;
 }
 .nav-bar-large {
-  height: 120rpx; /* 高度加大 */
+  height: 120rpx;
 }
 .nav-btn {
-  width: 80rpx;
-  height: 80rpx;
+  width: 60rpx;
+  height: 60rpx;
   border-radius: 50%;
   background: #fff3e0;
   display: flex;
@@ -66,15 +66,15 @@ page {
   transform: scale(0.92);
 }
 .nav-icon {
-  width: 48rpx;
-  height: 48rpx;
+  width: 32rpx;
+  height: 32rpx;
 }
 .nav-title {
   flex: 1;
   text-align: center;
-  font-size: 44rpx; /* 字體加大 */
+  font-size: 44rpx;
   font-weight: bold;
-  color: #7C4A1E;
+  color: #fff;
   letter-spacing: 4rpx;
 }
 
@@ -91,10 +91,10 @@ page {
   position: relative;
   z-index: 11;
   padding-top: 16rpx;
-  min-height: 90rpx; /* 高度加大 */
+  min-height: 90rpx;
 }
 .timeline-tabbar-large {
-  min-height: 90rpx; /* 高度加大 */
+  min-height: 90rpx;
   align-items: stretch;
 }
 .timeline-vertical {
@@ -135,7 +135,9 @@ page {
   height: 100%;
 }
 .timeline-tab-item {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   min-width: 140rpx;
   padding: 18rpx 40rpx;
   margin-right: 24rpx;
@@ -147,6 +149,7 @@ page {
   transition: all 0.2s;
   box-shadow: 0 2rpx 8rpx #bca46a11;
   line-height: 1;
+  text-align: center;
 }
 .timeline-tab-item-large {
   min-width: 140rpx;
@@ -202,8 +205,9 @@ page {
   border: 4rpx solid #fff;
 }
 .treasure-card {
+  position: relative;
   width: 84vw;
-  min-height: 180rpx;
+  min-height: 240rpx;
   background: #fff;
   border-radius: 32rpx;
   box-shadow: 0 4rpx 24rpx #bca46a11;
@@ -233,6 +237,7 @@ page {
   flex-direction: column;
   justify-content: space-between;
   min-width: 0;
+  position: relative;
 }
 .card-title {
   font-size: 36rpx;
@@ -258,7 +263,11 @@ page {
   -webkit-box-orient: vertical;
 }
 .card-detail-btn {
-  align-self: flex-end;
+  position: absolute;
+  right: -20rpx;
+  bottom: -44rpx;
+  margin: 0;
+  align-self: auto;
   background: #BCA46A;
   color: #fff;
   font-size: 22rpx;
@@ -267,11 +276,13 @@ page {
   border: none;
   box-shadow: 0 2rpx 8rpx #bca46a22;
   font-weight: 500;
-  margin-top: 8rpx;
   transition: transform 0.1s;
 }
 .card-detail-btn:active {
   transform: scale(0.95);
+}
+.card-detail-btn-second {
+  bottom: -80rpx !important;
 }
 
 /* 動效 */

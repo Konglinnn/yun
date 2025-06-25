@@ -16,6 +16,8 @@
   background: #FDF8F3;
   padding: 0 0 0 0;
   margin-top: 24rpx;
+  position: relative;
+  z-index: 2;
 }
 .search-bar-wrap {
   display: flex;
@@ -56,6 +58,8 @@
   align-items: center;
   margin-top: 12rpx;
   margin-bottom: 0;
+  position: relative;
+  z-index: 2;
 }
 .platform-title-effect-text {
   font-size: 48rpx;
@@ -147,6 +151,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  transition: transform 0.32s cubic-bezier(.68,-0.55,.27,1.55);
+}
+.book-cover-wrapper.active {
+  transform: scale(1.08);
+  box-shadow: 0 8rpx 32rpx #e7d3b088;
 }
 .book-cover {
   width: 100%;
@@ -178,7 +187,7 @@
   border: 2rpx solid #C2A875;
   background: transparent;
   margin-right: 16rpx;
-  transition: all 0.2s;
+  transition: transform 0.18s cubic-bezier(.68,-0.55,.27,1.55);
   white-space: nowrap;
   box-shadow: none;
   outline: none;
@@ -195,8 +204,7 @@
   transform: scale(1.08);
 }
 .chapter-btn:active {
-  box-shadow: 0 8rpx 24rpx #c2a875;
-  transform: scale(0.96);
+  transform: scale(0.92);
 }
 
 /* AI助手悬浮icon */
@@ -205,9 +213,12 @@
   height: 100vh;
   left: 0;
   top: 0;
-  z-index: 99;
-  position: absolute;
+  z-index: 9999;
+  position: fixed;
   pointer-events: none;
+  /* 提升移動流暢度 */
+  will-change: transform;
+  -webkit-transform: translateZ(0);
 }
 .ai-icon {
   width: 120rpx;
@@ -219,6 +230,11 @@
   align-items: center;
   justify-content: center;
   pointer-events: auto;
+  /* 移除所有transition和動畫 */
+  transition: none !important;
+}
+.ai-icon:active {
+  /* 無縮放特效 */
 }
 .ai-icon image {
   width: 100%;
@@ -226,6 +242,8 @@
   border-radius: 50%;
   border: 4rpx solid #fff;
   box-shadow: 0 2rpx 12rpx rgba(194,168,117,0.15);
+  /* 移除所有transition和動畫 */
+  transition: none !important;
 }
 
 /* AI助手对话框 */
@@ -239,14 +257,15 @@
   justify-content: center;
 }
 .ai-chatbox {
-  width: 80vw;
-  height: 50vh;
+  width: 94vw;
+  height: 70vh;
   background: #FDF8F3;
   border-radius: 48rpx;
   display: flex;
   flex-direction: column;
   overflow: hidden;
   box-shadow: 0 8rpx 32rpx rgba(194,168,117,0.15);
+  position: relative;
 }
 .ai-chat-header {
   display: flex;
@@ -266,8 +285,10 @@
 }
 .ai-msg-list {
   flex: 1;
-  padding: 24rpx;
+  padding: 24rpx 32rpx 140rpx 24rpx;
   overflow-y: auto;
+  height: 100%;
+  box-sizing: border-box;
 }
 .ai-msg-item {
   margin-bottom: 16rpx;
@@ -301,6 +322,13 @@
   display: flex;
   align-items: center;
   padding: 0 24rpx 24rpx 24rpx;
+  background: #FDF8F3;
+  z-index: 2;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  box-sizing: border-box;
 }
 .ai-input {
   flex: 1;
@@ -326,6 +354,10 @@
   padding: 0;
   border: none;
   box-sizing: border-box;
+  transition: transform 0.18s cubic-bezier(.68,-0.55,.27,1.55);
+}
+.ai-send-btn:active {
+  transform: scale(0.92);
 }
 
 /* 互動繪本漸變框新版 */
@@ -450,13 +482,21 @@
   justify-content: flex-end;
   align-items: flex-start;
   text-align: right;
+  width: 100%;
+  padding-right: 0;
 }
 .chat-bubble.user {
   background: #C2A875;
   color: #fff;
-  margin-left: 0;
-  margin-right: 8rpx;
+  margin-left: 48rpx;
+  margin-right: 0;
   align-self: flex-end;
+  border-bottom-right-radius: 4rpx;
+  max-width: 70vw;
+  min-width: 80rpx;
+  text-align: right;
+  box-sizing: border-box;
+  margin-left: auto;
 }
 .ai-msg-item.ai {
   display: flex;
@@ -502,4 +542,58 @@
   display: flex;
   flex-direction: column;
   animation: fadeIn 0.5s;
+}
+
+/* 彈出動畫 */
+@keyframes bubblePopUser {
+  0% { transform: scale(0.7) translateX(80rpx); opacity: 0; }
+  80% { transform: scale(1.05) translateX(0); opacity: 1; }
+  100% { transform: scale(1) translateX(0); opacity: 1; }
+}
+@keyframes bubblePopAI {
+  0% { transform: scale(0.7) translateX(-80rpx); opacity: 0; }
+  80% { transform: scale(1.05) translateX(0); opacity: 1; }
+  100% { transform: scale(1) translateX(0); opacity: 1; }
+}
+.ai-msg-item.user {
+  animation: bubblePopUser 0.28s cubic-bezier(.68,-0.55,.27,1.55);
+}
+.ai-msg-item.ai {
+  animation: bubblePopAI 0.28s cubic-bezier(.68,-0.55,.27,1.55);
+}
+
+.top-bg-effect {
+  position: relative;
+  width: 100vw;
+  padding-top: 24rpx;
+  padding-bottom: 32rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  overflow: hidden;
+}
+.top-bg-img {
+  position: absolute;
+  left: 0; top: 0; width: 100vw; height: 220rpx;
+  z-index: 0;
+  object-fit: cover;
+  opacity: 0.65;
+  pointer-events: none;
+}
+.top-bg-gradient {
+  position: absolute;
+  left: 0; top: 0; width: 100vw; height: 220rpx;
+  /* 上方透明，下方深色 */
+  background: linear-gradient(180deg, rgba(253,248,243,0.05) 0%, #FDF8F3ee 100%);
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* 點擊縮放特效通用類 */
+.tap-effect {
+  transition: transform 0.18s cubic-bezier(.68,-0.55,.27,1.55);
+}
+.tap-effect:active {
+  transform: scale(0.92);
 }

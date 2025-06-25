@@ -1,6 +1,6 @@
 <scroll-view class="profile-scroll" scroll-y>
   <view class="profile-container">
-    <!-- 頂部個人信息區 -->
+    <!-- 顶部个人信息区 -->
     <view class="profile-header">
       <image class="profile-bg-img" src="/assets/book2.png" mode="aspectFill"/>
       <view class="profile-bg-gradient"></view>
@@ -13,16 +13,16 @@
       </view>
     </view>
 
-    <!-- 名片區塊 -->
+    <!-- 名片区块 -->
     <view class="profile-card">
       <view class="profile-desc">{{desc}}</view>
-      <view class="profile-history-title">瀏覽記錄</view>
+      <view class="profile-history-title">浏览记录</view>
       <scroll-view class="profile-history-scroll" scroll-x>
         <image wx:for="{{historyBooks}}" wx:key="img" class="profile-history-img" src="{{item}}" mode="aspectFill"/>
       </scroll-view>
     </view>
 
-    <!-- 中部tab欄 -->
+    <!-- 中部tab栏 -->
     <view class="profile-tabs profile-tabs-margin">
       <view 
         wx:for="{{tabs}}" 
@@ -34,7 +34,7 @@
       </view>
     </view>
 
-    <!-- tab內容區 -->
+    <!-- tab内容区 -->
     <view class="tab-content">
       <!-- 我的徽章 -->
       <scroll-view wx:if="{{currentTab==0}}" class="badge-scroll" scroll-x>
@@ -66,7 +66,7 @@
       </view>
     </view>
 
-    <!-- 大圖查看彈窗 -->
+    <!-- 大图查看弹窗 -->
     <view wx:if="{{showPreview}}" class="img-preview-mask" bindtap="closePreview">
       <view class="img-preview-box" catchtap="stopTap">
         <image class="preview-img" src="{{previewImg}}" mode="aspectFit"/>

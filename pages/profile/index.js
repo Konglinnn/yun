@@ -1,14 +1,14 @@
 Page({
   data: {
     avatarUrl: '/assets/avatar1.png',
-    nickname: '文小鶴',
-    desc: '熱愛繪本創作與收藏，歡迎交流！',
+    nickname: '文小鹤',
+    desc: '热爱绘本创作与收藏，欢迎交流！',
     historyBooks: ['/assets/book1.png','/assets/book2.png','/assets/book3.png'],
     tabs: ['我的徽章', '我的收藏', '我的作品'],
     currentTab: 0,
     badges: [
-      {id: 1, img: '/assets/badge1.png', name: '優秀創作者', time: '2024-05-01'},
-      {id: 2, img: '/assets/badge2.png', name: '活躍用戶', time: '2024-04-20'}
+      {id: 1, img: '/assets/badge1.png', name: '优秀创作者', time: '2024-05-01'},
+      {id: 2, img: '/assets/badge2.png', name: '活跃用户', time: '2024-04-20'}
     ],
     collections: [
       {id: 1, img: '/assets/collect1.png', name: '收藏作品A', time: '2024-05-10'},

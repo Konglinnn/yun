@@ -7,7 +7,7 @@ Page({
       {img: '/assets/book4.png'},
       {img: '/assets/book5.png'}
     ],
-    // 章節標題
+    // 章节标题
     chapterTitles: [
       '辛氏酒店',
       '黄鹤',
@@ -15,7 +15,7 @@ Page({
       '黄鹤楼飘金',
       '仙鲤遗踪'
     ],
-    // 章節按鈕
+    // 章节按钮
     chapters: [
       '第一章',
       '第二章',
@@ -28,8 +28,10 @@ Page({
     messages: [
       {from: 'ai', text: '你好，我是文小鹤，有什么可以帮你？'}
     ],
-    inputValue: ''
+    inputValue: '',
+    scrollTo: 'msgBottom'
   },
+
   showAIChat() {
     this.setData({ showAI: true });
   },
@@ -45,24 +47,28 @@ Page({
   sendMsg() {
     const { inputValue, messages } = this.data;
     if (!inputValue.trim()) return;
-    messages.push({from: 'user', text: inputValue});
-    // 模拟AI回复
+    const newMessages = messages.concat([{from: 'user', text: inputValue}]);
+    this.setData({ messages: newMessages, inputValue: '', scrollTo: 'msgBottom' }, () => {
+      // 滚动到底部
+      this.setData({ scrollTo: 'msgBottom' });
+    });
     setTimeout(() => {
-      messages.push({from: 'ai', text: '这是AI的回复：' + inputValue});
-      this.setData({ messages, inputValue: '', scrollTo: 'msgBottom' });
+      const aiMessages = this.data.messages.concat([{from: 'ai', text: '这是AI的回复：' + inputValue}]);
+      this.setData({ messages: aiMessages, scrollTo: 'msgBottom' }, () => {
+        this.setData({ scrollTo: 'msgBottom' });
+      });
     }, 800);
-    this.setData({ messages, inputValue: '', scrollTo: 'msgBottom' });
   },
-  // 章節按鈕點擊
+  // 章节按钮点击
   selectChapter(e) {
     const idx = Number(e.currentTarget.dataset.index);
     this.setData({ currentChapter: idx });
   },
-  // 圖片輪播滑動時同步章節
+  // 图片轮播滑动时同步章节
   onSwiperChange(e) {
     this.setData({ currentChapter: e.detail.current });
   },
-  // 字體輪播滑動時同步章節
+  // 字体轮播滑动时同步章节
   onTitleSwiperChange(e) {
     this.setData({ currentChapter: e.detail.current });
   }

@@ -69,7 +69,7 @@
   height: 48rpx;
 }
 
-/* tab欄 */
+/* tab栏 */
 .profile-tabs {
   width: 92vw;
   margin: 0 auto 24rpx auto;
@@ -99,7 +99,7 @@
   box-shadow: 0 2rpx 8rpx #bca46a33;
 }
 
-/* 橫向徽章/收藏卡片 */
+/* 横向徽章/收藏卡片 */
 .badge-scroll {
   width: 100vw;
   display: flex;
@@ -184,7 +184,7 @@
   text-align: center;
 }
 
-/* 大圖預覽彈窗 */
+/* 大图预览弹窗 */
 .img-preview-mask {
   position: fixed;
   left: 0; top: 0; right: 0; bottom: 0;

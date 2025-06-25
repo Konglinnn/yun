@@ -4,9 +4,9 @@ Page({
     currentTab: 0,
     bannerIndex: 0,
     banners: [
-      { id: 1, image: '/assets/banner1.png', slogan: '今日熱門', desc: '發現今日最受歡迎的話題與創作，快來參與討論，與大家一起交流靈感！' },
-      { id: 2, image: '/assets/banner2.png', slogan: '討論專題', desc: '本週專題討論區，聚焦藝術與設計的深度話題，歡迎發表你的見解。' },
-      { id: 3, image: '/assets/banner3.png', slogan: '排行榜', desc: '瀏覽本週人氣排行榜，看看哪些作品和話題最受大家喜愛！' }
+      { id: 1, image: '/assets/banner1.png', slogan: '今日热门', desc: '发现今日最受欢迎的话题与创作，快来参与讨论，与大家一起交流灵感！' },
+      { id: 2, image: '/assets/banner2.png', slogan: '讨论专题', desc: '本周专题讨论区，聚焦艺术与设计的深度话题，欢迎发表你的见解。' },
+      { id: 3, image: '/assets/banner3.png', slogan: '排行榜', desc: '浏览本周人气排行榜，看看哪些作品和话题最受大家喜爱！' }
     ],
     posts: [
       {
