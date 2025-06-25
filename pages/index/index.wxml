@@ -55,12 +55,26 @@
 
   <!-- AI助手懸浮icon -->
   <movable-area class="ai-area">
-    <movable-view class="ai-icon" direction="all" y="600" x="300" bindtap="toggleAI">
+    <movable-view class="ai-icon" direction="all" y="600" x="300" bindtap="showAIChat">
       <image src="/assets/ai-icon.png"/>
     </movable-view>
   </movable-area>
-  <view wx:if="{{showAI}}" class="ai-chatbox">
-    <view class="chat-bubble">你好，我是文小鶴，有什麼可以幫你？</view>
-    <image class="ai-avatar" src="/assets/ai-avatar.png"/>
+  <!-- AI助手对话框全屏遮罩 -->
+  <view wx:if="{{showAI}}" class="ai-chat-mask" bindtap="hideAIChat">
+    <view class="ai-chatbox" catchtap="stopTap">
+      <scroll-view class="ai-msg-list" scroll-y scroll-with-animation scroll-into-view="{{scrollTo}}">
+        <view wx:for="{{messages}}" wx:key="index" class="ai-msg-item {{item.from}}" animation="bubbleIn">
+          <image wx:if="{{item.from=='ai'}}" class="ai-avatar-mini" src="/assets/ai-avatar.png"/>
+          <view class="chat-bubble {{item.from}}">
+            <text>{{item.text}}</text>
+          </view>
+        </view>
+        <view id="msgBottom"></view>
+      </scroll-view>
+      <view class="ai-input-bar-align">
+        <input class="ai-input-align" placeholder="请输入你的问题..." confirm-type="send" value="{{inputValue}}" bindinput="onInput" bindconfirm="sendMsg" />
+        <button class="ai-send-btn-align" bindtap="sendMsg">发送</button>
+      </view>
+    </view>
   </view>
 </view>

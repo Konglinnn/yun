@@ -3,58 +3,62 @@ const defaultAvatarUrl = 'https://mmbiz.qpic.cn/mmbiz/icTdbqWNOwNRna42FI242Lcia0
 
 Page({
   data: {
-    motto: 'Hello World',
-    userInfo: {
-      avatarUrl: defaultAvatarUrl,
-      nickName: '',
-    },
-    hasUserInfo: false,
-    canIUseGetUserProfile: wx.canIUse('getUserProfile'),
-    canIUseNicknameComp: wx.canIUse('input.type.nickname'),
+    currentIndex: 0,
     showAI: false,
-    chapters: ['第一章', '第二章', '第三章', '第四章', '第五章']
+    inputValue: '',
+    messages: [
+      { from: 'ai', text: '你好，我是文小鹤，有什么可以帮你？' }
+    ],
+    bookList: [
+      { title: '辛氏酒店', img: '/assets/book1.png' },
+      { title: '黄鹤', img: '/assets/book2.png' },
+      { title: '幺妹镇龟蛇', img: '/assets/book3.png' },
+      { title: '黄鹤楼飘金', img: '/assets/book4.png' },
+      { title: '仙鲤遗踪', img: '/assets/book5.png' }
+    ],
+    scrollTo: ''
   },
-  bindViewTap() {
-    wx.navigateTo({
-      url: '../logs/logs'
-    })
+  selectBook(e) {
+    this.setData({ currentIndex: e.currentTarget.dataset.index });
   },
-  onChooseAvatar(e) {
-    const { avatarUrl } = e.detail
-    const { nickName } = this.data.userInfo
+  prevBook() {
+    let idx = this.data.currentIndex - 1;
+    if (idx < 0) idx = this.data.bookList.length - 1;
+    this.setData({ currentIndex: idx });
+  },
+  nextBook() {
+    let idx = this.data.currentIndex + 1;
+    if (idx >= this.data.bookList.length) idx = 0;
+    this.setData({ currentIndex: idx });
+  },
+  showAIChat() {
+    this.setData({ showAI: true }, this.scrollToBottom);
+  },
+  hideAIChat() {
+    this.setData({ showAI: false });
+  },
+  stopTap() {
+    // 阻止冒泡，防止点击对话框本身关闭
+  },
+  onInput(e) {
+    this.setData({ inputValue: e.detail.value });
+  },
+  sendMsg() {
+    const val = this.data.inputValue.trim();
+    if (!val) return;
+    const newMsgs = this.data.messages.concat([{ from: 'user', text: val }]);
     this.setData({
-      "userInfo.avatarUrl": avatarUrl,
-      hasUserInfo: nickName && avatarUrl && avatarUrl !== defaultAvatarUrl,
-    })
+      messages: newMsgs,
+      inputValue: ''
+    }, this.scrollToBottom);
+    // 模拟AI回复
+    setTimeout(() => {
+      this.setData({
+        messages: this.data.messages.concat([{ from: 'ai', text: '收到：' + val }])
+      }, this.scrollToBottom);
+    }, 600);
   },
-  onInputChange(e) {
-    const nickName = e.detail.value
-    const { avatarUrl } = this.data.userInfo
-    this.setData({
-      "userInfo.nickName": nickName,
-      hasUserInfo: nickName && avatarUrl && avatarUrl !== defaultAvatarUrl,
-    })
-  },
-  getUserProfile(e) {
-    // 推荐使用wx.getUserProfile获取用户信息，开发者每次通过该接口获取用户个人信息均需用户确认，开发者妥善保管用户快速填写的头像昵称，避免重复弹窗
-    wx.getUserProfile({
-      desc: '展示用户信息', // 声明获取用户个人信息后的用途，后续会展示在弹窗中，请谨慎填写
-      success: (res) => {
-        console.log(res)
-        this.setData({
-          userInfo: res.userInfo,
-          hasUserInfo: true
-        })
-      }
-    })
-  },
-  toggleAI() {
-    this.setData({ showAI: !this.data.showAI });
-  },
-  prevChapter() {
-    // 左箭頭切換章節（可根據需要實現）
-  },
-  nextChapter() {
-    // 右箭頭切換章節（可根據需要實現）
+  scrollToBottom() {
+    this.setData({ scrollTo: 'msgBottom' });
   }
 })
