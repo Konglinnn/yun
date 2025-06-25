@@ -24,8 +24,8 @@
 4. 参与互动任务、查看藏品详情，或发布社区内容  
 
 ## 项目链接  
-- 微信小程序预览：[点击访问](https://example.miniapp.com)（实际需扫码进入）  
-- GitHub 仓库：[点击跳转](https://github.com/Konglinnn/yun.git)  
+- 微信小程序预览：需扫码进入，暂时没有二维码  
+- GitHub 仓库：https://github.com/Konglinnn/yun.git  
 
 ## 智能体设定摘要  
 - 角色：非遗文化小助手 “文小鹤”，拟人化鹤形象  
